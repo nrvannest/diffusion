@@ -1,16 +1,13 @@
 ---
 title: "Diffusion"
 output: html_document
+authors: Elmera Azadpour, Ryan Munnikhuis, Nikole Vannest
 ---
-
-
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(deSolve)
-
 ```
 
 # R implementation
