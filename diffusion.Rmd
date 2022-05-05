@@ -1,6 +1,8 @@
 ---
 title: "Diffusion"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 authors: Elmera Azadpour, Ryan Munnikhuis, Nikole Vannest
 ---
 
@@ -8,22 +10,23 @@ authors: Elmera Azadpour, Ryan Munnikhuis, Nikole Vannest
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(deSolve)
+library(here)
 ```
 
 # R implementation
 
 ```{r}
-source("../R/diffusion.R")
+source(here("R","diffusion.R"))
 
 # run our diffusion model (iterative difference equation) with initial concentration of 10, for 8 timestep (size 1m), and 10 space steps (size 1s)
 # using diffusion parameters 0.5 s/m2, 10 m2
 result = diff1(initialC=10, nx=10, dx=1, nt=8, dt=1, D=0.5, area=10)
 
 # a list is returned with our 3 data frames for concentration (conc), qin and qout
-result
+# result
 
 # used filled contour to plot results
-head(result$conc)
+# head(result$conc)
 filled.contour(result$conc, xlab="Time", ylab="Distance")
 
 # or if you prefer this orientation (Distance on x axis)
@@ -35,17 +38,14 @@ filled.contour(t(result$conc), ylab="Time", xlab="Distance")
 ```{r}
 # changes diffusivity and other parameters particularly
 # diffusivity, dx and dt
-res=diff1(initialC=10,nx=10,dx=1,nt=10,dt=30,D=0.006,area=1)
+res=diff1(initialC=10,nx=5,dx=25,nt=20,dt=20,D=0.75,area=10) 
 
-filled.contour(res$conc, xlab="Time", ylab="Distance")
-
+filled.contour(res$conc, xlab="Time (fraction of hour)",ylab="Distance Along Path (m)", main="Pollutant Diffusion")
 
 # we can also see how much material moved from place to place each time step
-filled.contour(res$qin, xlab="Time", ylab="Distance")
-
-
-# play with time step, space step and parameters
-
+filled.contour(res$qin, xlab="Time (fraction of hour)",ylab="Distance Along Path (m)", main = "Qin")
 
 ```
+
+overall increasing total simulation time (nt * dt) lead to an increase in the pollutant over time and space. Decreasing the  number of discrete segments (m) lead to greater distance of the pollutant along the path. 
 
