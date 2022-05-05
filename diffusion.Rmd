@@ -47,5 +47,5 @@ filled.contour(res$qin, xlab="Time (fraction of hour)",ylab="Distance Along Path
 
 ```
 
-overall increasing total simulation time (nt * dt) lead to an increase in the pollutant over time and space. Decreasing the  number of discrete segments (m) lead to greater distance of the pollutant along the path. 
+Overall, increasing the total simulation time (nt * dt) lead to an increase in pollutant diffusion over time and space. Decreasing the number of discrete segments (m) lead to greater distance of pollutants along the path. 
 
